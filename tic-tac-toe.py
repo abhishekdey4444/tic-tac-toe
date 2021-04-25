@@ -1,3 +1,4 @@
+
 '''-----------------variable of chance(no. of moves)------------------'''
 chance=0
 global board
@@ -30,14 +31,19 @@ def symbolCheck():
     global winplayer_X
     global winplayer_O
     symbol_name1=input()
-    if symbol_name1=="X":
+    if symbol_name1=="X" or symbol_name1=="x":
+        symbol_name1="X"
+        symbol_name2="O"
         winplayer_X=player1
         winplayer_O=player2
-        symbol_name2="O"
-    else:
+    elif symbol_name1=="O" or symbol_name1=="o":
+        symbol_name1="O"
         symbol_name2="X"
         winplayer_O=player1
         winplayer_X=player2
+    else:
+        print("INVALID INPUT")
+        exit()
         
 def mark():
     print("\nInput as Ex- 1 2   [***here 1 2 represents the co-ordinates***]\n")
@@ -63,28 +69,36 @@ def wincheck_x():
     global winplayer_X
     if board[0][0]=="X" and board[0][1]=="X" and board[0][2]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     elif board[0][2]=="X" and board[1][2]=="X" and board[2][2]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     elif board[2][0]=="X" and board[2][1]=="X" and board[2][2]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     elif board[0][0]=="X" and board[1][0]=="X" and board[2][0]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     elif board[1][0]=="X" and board[1][1]=="X" and board[1][2]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     elif board[0][1]=="X" and board[1][1]=="X" and board[2][1]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     elif board[0][0]=="X" and board[1][1]=="X" and board[2][2]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     elif board[0][2]=="X" and board[1][1]=="X" and board[2][0]=="X":
         print("%s wins" %(winplayer_X))
-        playagain()
+        return True
+        #playagain()
     else:
         pass
     
@@ -92,31 +106,49 @@ def wincheck_o():
     global winplayer_O
     if board[0][0]=="O" and board[0][1]=="O" and board[0][2]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     elif board[0][2]=="O" and board[1][2]=="O" and board[2][2]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     elif board[2][0]=="O" and board[2][1]=="O" and board[2][2]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     elif board[0][0]=="O" and board[1][0]=="O" and board[2][0]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     elif board[1][0]=="O" and board[1][1]=="O" and board[1][2]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     elif board[0][1]=="O" and board[1][1]=="O" and board[2][1]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     elif board[0][0]=="O" and board[1][1]=="O" and board[2][2]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     elif board[0][2]=="O" and board[1][1]=="O" and board[2][0]=="O":
         print("%s wins" %(winplayer_O))
-        playagain()
+        return True
+        #playagain()
     else:
         pass
-    
+
+def draw():
+    space=0
+    for i in range(3):
+        for j in range(3):
+            if board[i][j]==" ":
+                space+=1
+    if space==0:
+        print("THE MATCH IS A DRAW")
+        return True    
+
 def p1():
     print("\n\nPLAYER 1 your turn")
     global chance
@@ -149,14 +181,16 @@ def gameStart():
         mark()
         board_show()
         if wincheck_x()==True or wincheck_o()==True:
+            playagain()
             break
+        if draw()==True:
+            playagain()
         p2()
         mark()
         board_show()
         if wincheck_x()==True or wincheck_o()==True:
             break
-        if chance>=8:
-            print("THE MATCH IS A DRAW")
+        if draw()==True:
             playagain()
 
 '''-------------------------functions end here---------------------------'''
